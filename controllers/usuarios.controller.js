@@ -37,7 +37,7 @@ exports.atualizarUsuario = async (req, res) => {
             "Resultado": resultado
         });
     } catch (error) {
-        return res.status(500).send({ "Mensagem": error.massage });
+        return res.status(500).send({ "Mensagem": error});
     }
 }
 
@@ -67,7 +67,7 @@ exports.cadastrarUsuario = async (req, res) => {
             "Resultado": resultado
         });
     } catch (error) {
-        return res.status(500).send({ "Error": error.massage });
+        return res.status(500).send({ "Error": error});
     }
 }
 
@@ -100,6 +100,6 @@ exports.login = async (req, res) => {
         });
 
     } catch (error) {
-        return res.status(500).send({ "Error": error.massage });
+        return res.status(500).send({ "Error": error});
     }
 }
