@@ -1,9 +1,12 @@
 const express = require("express");
 const router = express.Router();
 const login = require("../middleware/usuarios.middleware");
-const filaController = require("../moddleware/usuarios/middleware");
+const brinquedosController = require("../controller/brinquedos.controller");
 
-router.post("/:idRides",
+router.post("/",
+    login.required,
+    login.userRegistred,
+    brinquedosController.cadastrarBrinquedo
 
 );
 module.exports = router;
