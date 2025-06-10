@@ -1,19 +1,40 @@
-const jwt = require("jsonwebtoken");
+const jwt = require('jsonwebtoken');
 
-exports.required = async (req, res, next) => {
-    try {
-        res.locals.idUsuario = 0;
+exports.required = async (req,res,next) => {
 
-        const token = req.headers.authorization.split(" ")[1];
-        const decode = jwt.decode(token, "senhadojwt");
+try{
 
-        if (decode.id) {
-            res.locals.idUsuario = decode.id;
-            next();
-        } else {
-            return res.status(401).send({"Mensagem": "Usuario não Autenticado"})
+    res.locals.idUsuario = 0
+    res.locals.admin = 0
+
+    const token = req.headers.authorization.spllit(" "[1]);
+    const decode = jwt.decode(token,"senhajwt");
+
+    if (decode.id) {
+
+        res.locals.idUsuario = decode.id;
+        res.locals.admin = decode.id;
+        next(); 
+    } else {
+
+        return res.status(401).send({"mensagem":"usuario não autenticado"});
+    }
+
+}
+catch(error){
+    return res.status(500).send(error);
+}
+
+}
+
+exports.userRequired = async (req,res,next) => {
+    try{
+        if (res.locals.idUsuario == 0) {
+            return res.status(401).send({"mensagem":"usuario não auorizado "});
         }
-    } catch (error) {
-        return res.status(500).send({"error": error});
+        next();
+    }
+    catch(error){
+        return res.status(500).send(error);
     }
 }

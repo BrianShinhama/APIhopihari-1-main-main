@@ -1,12 +1,18 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
-const login = require("../middleware/usuarios.middleware");
-const brinquedosController = require("../controller/brinquedos.controller");
+const login = require('../middleware/usuarios.middleware');
+const brinquedoscontroller  = require('../controllers/brinquedos.controller');
 
-router.post("/",
+
+
+router.post ('/', 
     login.required,
-    login.userRegistred,
-    brinquedosController.cadastrarBrinquedo
-
+    login.userRequired,
+    brinquedoscontroller.cadastroBrinquedo,
 );
+ 
+router.get ('/area/:areaName',
+    login.required,
+    brinquedoscontroller.getBrinquedosByArea);
+
 module.exports = router;

@@ -1,6 +1,6 @@
 const mysql = require("../mysql");
 
-exports.cadastrarBrinquedo = async (requestAnimationFrame, res) => {
+exports.cadastrarBrinquedo = async (req, res) => {
     try {
         const resultados = await mysql.execute(`
             INSERT INTO rides (name, tempo_espera, status, area)
